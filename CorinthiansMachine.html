@@ -42,7 +42,7 @@
 <body>
     
 
-        <img src="https://upload.wikimedia.org/wikipedia/pt/b/b4/Corinthians_simbolo.png" alt="">
+        <img src="./imagens/Corinthians.png" alt="">
     
 
         <center>
@@ -65,7 +65,7 @@
                 <br><br>
                 <input onclick="octal()" type="button" value="Converter octal">
                 <br><br>
-                <h3 class="texto">Digite um número hexadecimal</h3>
+                <h3 class="texto">Digite um número hexadecimal <br>(apenas letras maiúsculas)</h3>
                 <input id="ipt_hexadecimal" type="text" placeholder="Salve">
                 <br><br>
                 <input onclick="hexadecimal()" type="button" value="Converter hexadecimal">
@@ -84,10 +84,8 @@
 </html>
 <script>
 
-    var audio = new Audio("Corinthians_audio.mp3");
-    var burro = new Audio("burro.mp3")
-    var vai = new Audio("./VaiCorinthians.mp3")
-    vai.play()
+    var audio = new Audio("./audios/Corinthians_audio.mp3");
+    var burro = new Audio("./audios/Burro_audio.mp3")
 
     function Decimal() {
         var decimal = Number(ipt_decimal.value)
@@ -95,9 +93,9 @@
         var hexadecimal = decimal.toString(16);
         var binario = decimal.toString(2);
 
-        if (isNaN(decimal)) {
+        if (/[^0-9]/.test(decimal)) {
+            div_men.innerHTML = `<b>Resultado:<b>`
             burro.play()
-            div_men.innerHTML = ``
             alert('Digite apenas algarismos de 0 a 9')
         } else {
             audio.play()
@@ -116,9 +114,9 @@
         var octal = decimal.toString(8);
         var hexadecimal = decimal.toString(16);
 
-        if (isNaN(decimal)) {
+        if (/[^0-1]/.test(binario)) {
+            div_men.innerHTML = `<b>Resultado:<b>`
             burro.play()
-            div_men.innerHTML = ``
             alert('Digite apenas algarismos entre 0 e 1')
         } else {
             audio.play()
@@ -136,9 +134,9 @@
         var binario = decimal.toString(2);
         var hexadecimal = decimal.toString(16);
 
-        if (isNaN(decimal)) {
+        if (/[^0-7]/.test(octal)) {
+            div_men.innerHTML = `<b>Resultado:<b>`
             burro.play()
-            div_men.innerHTML = ``
             alert('Digite apenas algarismos de 0 a 7')
         } else {
             audio.play()
@@ -152,14 +150,14 @@
     function hexadecimal() {
 
         var hexadecimal = ipt_hexadecimal.value
-        var decimal = parseInt(hexadecimal, 16);
+        var decimal = parseInt(hexadecimal,16);
         var binario = decimal.toString(2);
         var octal = decimal.toString(8);
 
-        if (isNaN(decimal)) {
+        if (/[^0-F]/.test(hexadecimal) || /[^0-f]/.test(hexadecimal)) {
+            div_men.innerHTML = `<b>Resultado:<b>`
             burro.play()
-            div_men.innerHTML = ``
-            alert('Digite apenas algarismos de 0 a 9 e letras de A a F')
+            alert('Digite apenas algarismos de 0 a 9 e letras de A a F (apenas letras maiúsculas)')
         } else {
             audio.play()
             div_men.innerHTML =
@@ -170,5 +168,4 @@
         }
 
     }
-    vai.play()
 </script>
