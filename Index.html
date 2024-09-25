@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salve o Corinthians</title>
+    <style>
+        body {
+            background-color: black;
+        }
+
+        .texto {
+            color: white;
+        }
+
+        div {
+            background-color: black;
+            float: left;
+            width: 25%;
+        }
+
+        .result {
+            margin-top: 250px;
+            background-color: white;
+            height: fit-content;
+            width: fit-content;
+            padding: 20px;
+            border-radius: 15px;
+            margin-left: 50px;
+        }
+
+        img {
+            float: right;
+            height: 150px;
+        }
+
+        
+    </style>
+</head>
+
+<body>
+    
+
+        <img src="./imagens/Corinthians.png" alt="">
+    
+
+        <center>
+
+            <div>
+                </h2>
+                <br><br>
+                <h3 class="texto">Digite um número decimal:</h3>
+                <input id="ipt_decimal" type="text" placeholder="Salve">
+                <br><br>
+                <input onclick="Decimal()" type="button" value="Converter decimal">
+                <br><br>
+                <h3 class="texto">Digite um número binário</h3>
+                <input id="ipt_binario" type="text" placeholder="Salve">
+                <br><br>
+                <input onclick="binario()" type="button" value="Converter binário">
+                <br><br>
+                <h3 class="texto">Digite um número octal</h3>
+                <input id="ipt_octal" type="text" placeholder="Salve">
+                <br><br>
+                <input onclick="octal()" type="button" value="Converter octal">
+                <br><br>
+                <h3 class="texto">Digite um número hexadecimal <br>(apenas letras maiúsculas)</h3>
+                <input id="ipt_hexadecimal" type="text" placeholder="Salve">
+                <br><br>
+                <input onclick="hexadecimal()" type="button" value="Converter hexadecimal">
+                <br><br>
+            </div>
+            
+            <div class="result" id="div_men"><b>Resultado:<b></div>
+
+        </center>
+
+    
+
+    
+</body>
+
+</html>
+<script>
+
+    var audio = new Audio("./audios/Corinthians_audio.mp3");
+    var burro = new Audio("./audios/Burro_audio.mp3")
+
+    function Decimal() {
+        var decimal = Number(ipt_decimal.value)
+        var octal = decimal.toString(8);
+        var hexadecimal = decimal.toString(16);
+        var binario = decimal.toString(2);
+
+        if (/[^0-9]/.test(decimal)) {
+            div_men.innerHTML = `<b>Resultado:<b>`
+            burro.play()
+            alert('Digite apenas algarismos de 0 a 9')
+        } else {
+            audio.play()
+            div_men.innerHTML =
+                `<b>Resultado:<br>
+                <b>Octal: ${octal}<br>
+                <b>Hexadecimal: ${hexadecimal}<br>
+                <b>Binário: ${binario}</b>`
+        }
+    }
+
+    function binario() {
+
+        var binario = Number(ipt_binario.value)
+        var decimal = parseInt(binario, 2);
+        var octal = decimal.toString(8);
+        var hexadecimal = decimal.toString(16);
+
+        if (/[^0-1]/.test(binario)) {
+            div_men.innerHTML = `<b>Resultado:<b>`
+            burro.play()
+            alert('Digite apenas algarismos entre 0 e 1')
+        } else {
+            audio.play()
+            div_men.innerHTML =
+                `<b>Resultado:<br>
+                <b>Decimal: ${decimal}<br>
+                <b>Octal: ${octal}<br>
+                <b>Hexadecimal: ${hexadecimal}</b>`
+        }
+    }
+    function octal() {
+
+        var octal = Number(ipt_octal.value)
+        var decimal = parseInt(octal, 8);
+        var binario = decimal.toString(2);
+        var hexadecimal = decimal.toString(16);
+
+        if (/[^0-7]/.test(octal)) {
+            div_men.innerHTML = `<b>Resultado:<b>`
+            burro.play()
+            alert('Digite apenas algarismos de 0 a 7')
+        } else {
+            audio.play()
+            div_men.innerHTML =
+                `<b>Resultado:<br>
+                <b>Decimal: ${decimal}<br>
+                <b>Binário: ${binario}<br>
+                <b>Hexadecimal: ${hexadecimal}</b>`
+        }
+    }
+    function hexadecimal() {
+
+        var hexadecimal = ipt_hexadecimal.value
+        var decimal = parseInt(hexadecimal,16);
+        var binario = decimal.toString(2);
+        var octal = decimal.toString(8);
+
+        if (/[^0-F]/.test(hexadecimal) || /[^0-f]/.test(hexadecimal)) {
+            div_men.innerHTML = `<b>Resultado:<b>`
+            burro.play()
+            alert('Digite apenas algarismos de 0 a 9 e letras de A a F (apenas letras maiúsculas)')
+        } else {
+            audio.play()
+            div_men.innerHTML =
+                `<b>Resultado:<br>
+                <b>Decimal: ${decimal}<br>
+                <b>Binário: ${binario}<br>
+                <b>Octal: ${octal}</b>`
+        }
+
+    }
+</script>
